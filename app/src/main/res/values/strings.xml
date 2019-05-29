@@ -6,4 +6,7 @@
 
     <!-- Text for the search button [CHAR LIMIT=NONE] -->
     <string name="search">Search</string>
+
+    <!-- Content description for the image of the book -->
+    <string name="book_image">Book Image</string>
 </resources>
