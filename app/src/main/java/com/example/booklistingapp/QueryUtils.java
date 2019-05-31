@@ -44,7 +44,7 @@ public final class QueryUtils {
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
-            Log.e(LOG_TAG,"Problem making the HTTP request.", e);
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
         // Extract relevant fields from the JSON response and create a list of {@link Book}s.
@@ -93,10 +93,10 @@ public final class QueryUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
-                Log.e(LOG_TAG,"Error response code: " + urlConnection.getResponseCode());
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG,"Problem retrieving the book JSON results", e);
+            Log.e(LOG_TAG, "Problem retrieving the book JSON results", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -130,6 +130,8 @@ public final class QueryUtils {
     }
 
     private static List<Book> extractFeatureFromJson(String bookJSON) {
+        String author = "";
+
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(bookJSON)) {
             return null;
@@ -158,8 +160,11 @@ public final class QueryUtils {
                 String title = volumeInfo.getString("title");
 
                 // Extract the value for the key called "authors"
-                String author = volumeInfo.getString("authors");
+                JSONArray authorsArray = volumeInfo.getJSONArray("authors");
 
+                for (int j = 0; j < authorsArray.length(); j++) {
+                    author = authorsArray.getString(j);
+                }
                 // Extract the value for the key called "publishedDate"
                 String publishDate = volumeInfo.getString("publishedDate");
 

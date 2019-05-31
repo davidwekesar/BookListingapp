@@ -9,4 +9,8 @@
 
     <!-- Content description for the image of the book -->
     <string name="book_image">Book Image</string>
+
+    <string name="by_author">By\u0020</string>
+
+    <string name="released">Released:\u0020</string>
 </resources>

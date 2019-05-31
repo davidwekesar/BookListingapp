@@ -58,14 +58,17 @@ public class BookAdapter extends ArrayAdapter<Book> {
         // Get the author of the book.
         String author = currentBook.getAuthor();
         // Display the author of the current book in that TextView.
-        authorView.setText(author);
+        String by = listItemView.getResources().getString(R.string.by_author);
+        authorView.setText(by + author);
 
         // Find the TextView with the view ID publish_date.
         TextView dateView = listItemView.findViewById(R.id.publish_date);
         // Get the publish date of the book.
         String date = currentBook.getPublishDate();
+
+        String released = listItemView.getResources().getString(R.string.released);
         // Display the publish date of the current book in that TextView.
-        dateView.setText(date);
+        dateView.setText(released + date);
 
         return listItemView;
     }
