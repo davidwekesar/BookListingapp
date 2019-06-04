@@ -37,6 +37,8 @@ public final class QueryUtils {
      */
     public static List<Book> fetchBookData(String requestUrl) {
 
+        Log.i(LOG_TAG, "TEST: fetchBookData() called ...");
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
