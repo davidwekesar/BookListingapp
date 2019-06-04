@@ -36,6 +36,13 @@ public final class QueryUtils {
      * Query the Google books data set and return a list of {@link Book} objects.
      */
     public static List<Book> fetchBookData(String requestUrl) {
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Create URL object.
         URL url = createUrl(requestUrl);
 
@@ -162,15 +169,26 @@ public final class QueryUtils {
                 // Extract the value for the key called "authors"
                 JSONArray authorsArray = volumeInfo.getJSONArray("authors");
 
+                // For each author in the authorsArray extract the value
+                // for the key called "authors".
                 for (int j = 0; j < authorsArray.length(); j++) {
                     author = authorsArray.getString(j);
                 }
+
                 // Extract the value for the key called "publishedDate"
                 String publishDate = volumeInfo.getString("publishedDate");
 
+                // Extract the value for the key called "description"
+                String description = volumeInfo.getString("description");
+
+                // Extract the JSONObject associated with the key called "imageLinks".
+                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                // Extract the value for the key called "smallThumbnail".
+                String imageUrl = imageLinks.getString("smallThumbnail");
+
                 // Create a new {@link Book} object with the title, author and
                 // publishDate from the JSON response
-                Book book = new Book(title, author, publishDate);
+                Book book = new Book(title, author , publishDate, description, imageUrl);
 
                 // Add the new {@link Book} to the list of books
                 books.add(book);

@@ -5,28 +5,61 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingStart="16dp"
-    android:paddingLeft="16dp"
     android:paddingEnd="16dp"
-    android:paddingRight="16dp"
     tools:context=".BookActivity">
 
     <EditText
         android:id="@+id/search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         android:hint="@string/book_title"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColor="@color/primaryTextColor" />
 
     <Button
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search" />
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/search"
+        android:textColor="@color/primaryTextColor" />
 
-    <ListView
-        android:id="@+id/list"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="16dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+        <!-- Empty view is only visible when the list has no items. -->
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-medium"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/secondaryTextColor"
+            tools:text="No Books found." />
+
+        <!-- Loading indicator is only shown before the first load -->
+        <ProgressBar
+            android:id="@+id/loading_indicator"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

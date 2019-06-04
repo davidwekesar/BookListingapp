@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -46,6 +48,15 @@ public class BookAdapter extends ArrayAdapter<Book> {
         // Find the book at the given position in the list of books.
         Book currentBook = getItem(position);
 
+        // Find the ImageView with the view ID image.
+        ImageView imageView = listItemView.findViewById(R.id.image);
+
+        if (currentBook != null) {
+            Picasso.with(this.getContext())
+                    .load(currentBook.getImageUrl())
+                    .into(imageView);
+        }
+
         // Find the TextView with the view ID title.
         TextView titleView = listItemView.findViewById(R.id.title);
         // Get the Title of the book.
@@ -65,6 +76,13 @@ public class BookAdapter extends ArrayAdapter<Book> {
         TextView dateView = listItemView.findViewById(R.id.publish_date);
         // Get the publish date of the book.
         String date = currentBook.getPublishDate();
+
+        // Find the TextView with the view ID description.
+        TextView descriptionView = listItemView.findViewById(R.id.description);
+        // Get the description of the book.
+        String description = currentBook.getDescription();
+        // Display the description of the current book in that TextView.
+        descriptionView.setText(description);
 
         String released = listItemView.getResources().getString(R.string.released);
         // Display the publish date of the current book in that TextView.
