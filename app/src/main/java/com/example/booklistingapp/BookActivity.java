@@ -102,7 +102,7 @@ public class BookActivity extends AppCompatActivity implements LoaderCallbacks<L
             }
         });
 
-        // Set a click listener on the button, which sends a query to the google
+        // Set a click listener on the button, to send a query to the google
         // books url with the user's input retrieved from the EditText field.
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

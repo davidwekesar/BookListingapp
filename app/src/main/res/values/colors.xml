@@ -14,4 +14,7 @@
 
     <!-- Secondary text color of the app -->
     <color name="secondaryTextColor">#757575</color>
+
+    <!-- Button text color of the app -->
+    <color name="buttonTextColor">#FFFFFF</color>
 </resources>
