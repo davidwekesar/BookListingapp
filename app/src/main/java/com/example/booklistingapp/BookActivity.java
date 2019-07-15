@@ -111,11 +111,8 @@ public class BookActivity extends AppCompatActivity implements LoaderCallbacks<L
                 editText.setCursorVisible(false);
 
                 // Get the value of the text entered.
-                editTextInput = editText.getText().toString();
+                editTextInput = editText.getText().toString().trim();
                 Log.i(LOG_TAG, "This is the input result: " + editTextInput);
-
-                // Remove whitespaces from the EditText input before using it as a URL parameter.
-                editTextInput = editTextInput.replaceAll("\\s+", "");
 
                 // URL for the query sent to the google books api.
                 URL = "https://www.googleapis.com/books/v1/volumes?q=" + editTextInput;
