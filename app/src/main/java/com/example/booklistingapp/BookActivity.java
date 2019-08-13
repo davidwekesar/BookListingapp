@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,7 +26,9 @@ public class BookActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     public static final String LOG_TAG = BookActivity.class.getName();
 
-    private String URL;
+    private static final String GOOGLE_BOOKS_REQUEST_URL =
+            "https://www.googleapis.com/books/v1/volumes";
+
 
     /**
      * Constant value for the book loader ID. We can choose any integer.
@@ -55,12 +59,11 @@ public class BookActivity extends AppCompatActivity implements LoaderCallbacks<L
     /**
      * EditText input to save the input from the user.
      */
-    private String editTextInput;
+    private String searchQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(LOG_TAG, "TEST: Book Activity onCreate() called");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.books_activity);
 
@@ -111,11 +114,13 @@ public class BookActivity extends AppCompatActivity implements LoaderCallbacks<L
                 editText.setCursorVisible(false);
 
                 // Get the value of the text entered.
-                editTextInput = editText.getText().toString().trim();
-                Log.i(LOG_TAG, "This is the input result: " + editTextInput);
+                searchQuery = editText.getText().toString().trim();
 
-                // URL for the query sent to the google books api.
-                URL = "https://www.googleapis.com/books/v1/volumes?q=" + editTextInput;
+                // Check if the EditText field input is blank
+                if (TextUtils.isEmpty(searchQuery)) {
+                    // Since there is no text input in the EditText field return early
+                    return;
+                }
 
                 // Display the loading before the books data has finished loading.
                 loadingIndicator.setVisibility(View.VISIBLE);
@@ -160,8 +165,14 @@ public class BookActivity extends AppCompatActivity implements LoaderCallbacks<L
     @Override
     public Loader<List<Book>> onCreateLoader(int id, Bundle bundle) {
         Log.i(LOG_TAG, "TEST: onCreateLoader() called ...");
+
+        Uri baseUri = Uri.parse(GOOGLE_BOOKS_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("q", searchQuery);
+
         // Create a new loader for the given URL.
-        return new BookLoader(this, URL);
+        return new BookLoader(this, uriBuilder.toString());
     }
 
     @Override

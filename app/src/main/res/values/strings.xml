@@ -2,7 +2,7 @@
     <string name="app_name">Book Listing app</string>
 
     <!-- Hint text for the editable TextView [CHAR LIMIT=NONE] -->
-    <string name="book_title">Book Title...</string>
+    <string name="search_book_hint">Enter book title...</string>
 
     <!-- Text for the search button [CHAR LIMIT=NONE] -->
     <string name="search">Search</string>
